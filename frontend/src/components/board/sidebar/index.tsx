@@ -2,22 +2,16 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { useSelector, useDispatch } from 'react-redux';
-import { setActiveBoard } from '@/store/features/board/slice';
-import {
-  useCreateBoardMutation,
-  useGetBoardsQuery
-} from '@/store/features/board/api';
+import { useSelector } from 'react-redux';
+import { useGetBoardsQuery } from '@/store/features/board/api';
 import { RootState } from '@/store';
 import IconButton from '@/components/ui/iconButton';
 import { AlignJustify, ClipboardList } from 'lucide-react';
 import { IBoard } from '@/lib/types';
 import Button from '@/components/ui/button';
 import AddBoardModal from '../addBoard';
-// import AddBoardModal from './forms/AddBoardModal';
 
 const Sidebar: React.FC = () => {
-  const dispatch = useDispatch();
   const {
     data: boardsResponse,
     isLoading,
@@ -26,7 +20,6 @@ const Sidebar: React.FC = () => {
     page: '1',
     pageSize: '10'
   });
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const activeBoardId = useSelector(
     (state: RootState) => state.boards.activeBoardId
   );
@@ -35,23 +28,6 @@ const Sidebar: React.FC = () => {
   const [isAddBoardModalOpen, setIsAddBoardModalOpen] = useState(false);
 
   const [isOpen, setIsOpen] = useState(false);
-
-  const [createBoard, { isLoading: isCreatingBoard }] =
-    useCreateBoardMutation();
-
-  const handleBoardClick = (boardId: string) => {
-    dispatch(setActiveBoard(boardId));
-    setIsSidebarOpen(false); // Close sidebar on mobile after selection
-  };
-
-  const handleAddBoard = async (title: string) => {
-    try {
-      const newBoard = await createBoard({ title }).unwrap();
-      setIsAddBoardModalOpen(false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -67,7 +43,7 @@ const Sidebar: React.FC = () => {
         />
       )}
       <aside
-        className={`fixed md:relative p-2 top-0 left-0 h-screen w-64 bg-primary shadow-lg transform ${
+        className={`fixed md:relative p-2 top-0 left-0 h-screen w-64 bg-primary z-50 shadow-lg transform ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         } transition-transform duration-300 ease-in-out md:translate-x-0`}
       >

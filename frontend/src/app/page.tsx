@@ -1,5 +1,6 @@
 'use client';
 
+import Loading from '@/components/ui/loading';
 import { useGetBoardsQuery } from '@/store/features/board/api';
 import { setActiveBoard } from '@/store/features/board/slice';
 import { useAppDispatch } from '@/store/hooks';
@@ -18,7 +19,11 @@ const HomePage = () => {
     }
   }, [boards, dispatch, router]);
 
-  return <div>Loading...</div>;
+  return (
+    <div>
+      <Loading message='Loading...' />
+    </div>
+  );
 };
 
 export default HomePage;

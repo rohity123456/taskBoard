@@ -74,12 +74,12 @@ taskboard/
 * **Boards:**
     * `GET /api/v1/boards`: Fetch all boards
     * `POST /api/v1/boards`: Create a new board
-    * `PUT /api/v1/boards/:id`: Update a board
+    * `PATCH /api/v1/boards/:id`: Update a board
     * `DELETE /api/v1/boards/:id`: Delete a board
 * **Tasks:**
     * `GET /api/v1/tasks`: Fetch tasks for a specific board
     * `POST /api/v1/tasks`: Create a new task in a board
-    * `PUT /api/v1/tasks/:taskId`: Update a task
+    * `PATCH /api/v1/tasks/:taskId`: Update a task
     * `DELETE /api/v1/tasks/:taskId`: Delete a task
 
 **Additional Notes**

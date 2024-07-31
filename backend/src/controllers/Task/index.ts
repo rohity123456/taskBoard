@@ -14,7 +14,7 @@ class TaskController {
       };
 
       const pageNo = parseInt((req.query.pageNo || '1') as string);
-      const pageSize = parseInt((req.query.pageSize || '10') as string);
+      const pageSize = parseInt((req.query.pageSize || '1000') as string);
 
       const [tasks, totalTasks] = await getTasks(filters, pageNo, pageSize);
       sendJSONResponse(res, {

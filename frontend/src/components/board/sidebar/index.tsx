@@ -115,7 +115,7 @@ const BoardsList = ({
 }) => {
   return (
     <div className=''>
-      <h3 className='text-sm uppercase text-textSecondary'>{`All Boards ${boards.length}`}</h3>
+      <h3 className='text-sm uppercase text-textSecondary'>{`All Boards (${boards.length})`}</h3>
       <ul className='py-2'>
         {boards.map((board) => (
           <Link key={board._id} href={`/board/${board._id}`}>

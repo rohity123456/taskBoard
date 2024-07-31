@@ -8,7 +8,7 @@ class BoardController {
         roomId: req.params.roomId
       };
       const pageNo = parseInt((req.query.pageNo || '1') as string);
-      const pageSize = parseInt((req.query.pageSize || '10') as string);
+      const pageSize = parseInt((req.query.pageSize || '100') as string);
 
       const [boards, totalBoards] = await getBoards(filters, pageNo, pageSize);
       sendJSONResponse(res, {

@@ -10,8 +10,9 @@ class TaskController {
   getTasks = async (req: Request, res: Response) => {
     try {
       const filters = {
-        roomId: req.params.roomId
+        boardId: req.query.boardId
       };
+
       const pageNo = parseInt((req.query.pageNo || '1') as string);
       const pageSize = parseInt((req.query.pageSize || '10') as string);
 

@@ -17,9 +17,9 @@ export const updateTask = async (
   task: ITask
 ): Promise<ITask | null> => {
   try {
-    const updatedTask = await Task.findOneAndUpdate({ taskId }, task, {
+    const updatedTask = await Task.findOneAndUpdate({ _id: taskId }, task, {
       new: true
-    });
+    }).populate('status');
     return updatedTask?.toObject() || null;
   } catch (e: any) {
     catchException(e);
@@ -33,7 +33,8 @@ export const getTasks = async (
   pageSize: number
 ): Promise<[ITask[], number]> => {
   try {
-    const tasks = await Task.find(filters)
+    const tasks = await Task.find(filters, {})
+      .populate('status')
       .skip((pageNo - 1) * pageSize)
       .sort({ createdAt: -1 })
       .limit(pageSize);
@@ -47,7 +48,7 @@ export const getTasks = async (
 
 export const deleteTask = async (taskId: string): Promise<boolean> => {
   try {
-    await Task.deleteOne({ taskId });
+    await Task.deleteOne({ _id: taskId });
     return true;
   } catch (e: any) {
     catchException(e);

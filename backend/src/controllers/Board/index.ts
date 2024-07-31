@@ -1,6 +1,6 @@
 import { sendJSONResponse } from 'src/utils/helper';
 import { Request, Response } from 'express';
-import { createBoard, getBoards } from '@/models/Board/service';
+import { createBoard, getBoard, getBoards } from '@/models/Board/service';
 class BoardController {
   getBoards = async (req: Request, res: Response) => {
     try {
@@ -29,6 +29,16 @@ class BoardController {
       };
       const createdBoard = await createBoard(boardObj);
       sendJSONResponse(res, createdBoard);
+    } catch (e: any) {
+      sendJSONResponse(res, e, false, 500);
+    }
+  };
+
+  getBoard = async (req: Request, res: Response) => {
+    try {
+      const boardId = req.params.boardId;
+      const board = await getBoard(boardId);
+      sendJSONResponse(res, board);
     } catch (e: any) {
       sendJSONResponse(res, e, false, 500);
     }

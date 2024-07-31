@@ -17,7 +17,7 @@ export const updateBoard = async (
   board: IBoard
 ): Promise<IBoard | null> => {
   try {
-    const updatedBoard = await Board.findOneAndUpdate({ boardId }, board, {
+    const updatedBoard = await Board.findOneAndUpdate({ _id: boardId }, board, {
       new: true
     });
     return updatedBoard?.toObject() || null;
@@ -42,5 +42,15 @@ export const getBoards = async (
   } catch (e: any) {
     catchException(e);
     return [[], 0];
+  }
+};
+
+export const getBoard = async (boardId: string): Promise<IBoard | null> => {
+  try {
+    const board = await Board.findOne({ _id: boardId });
+    return board?.toObject() || null;
+  } catch (e: any) {
+    catchException(e);
+    return null;
   }
 };

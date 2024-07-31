@@ -4,7 +4,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
 export const baseQuery = fetchBaseQuery({
-  baseUrl: 'http://localhost:8000/api/v1',
+  baseUrl: process.env.NEXT_PUBLIC_BASE_API_URL,
   timeout: CONSTANTS['apiTimeout'],
   prepareHeaders: async (headers) => {
     const token = '';

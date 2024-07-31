@@ -9,8 +9,7 @@ import { useEffect } from 'react';
 const HomePage = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { data: boards } = useGetBoardsQuery({ page: '1', pageSize: '10' }); // Assuming initial fetch
-  console.log('boards', boards);
+  const { data: boards } = useGetBoardsQuery({ page: '1', pageSize: '10' });
   useEffect(() => {
     if (boards && boards.data.boards.length > 0) {
       const firstBoardId = boards.data.boards[0]._id;
